@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<robot name="p3bot" xmlns:xacro="http://ros.org/wiki/xacro">
+
+  <!-- ====== ARGUMENTOS GLOBALES ====== -->
+  <xacro:arg name="use_sim" default="true"/>
+  <xacro:arg name="use_meshes" default="true"/>
+  <xacro:arg name="left_arm" default="true"/>
+  <xacro:arg name="right_arm" default="true"/>
+
+  <!-- ====== BASE LINK ====== -->
+  <link name="base_link"/>
+
+  <!-- ====== INCLUDES ====== -->
+  <xacro:include filename="$(find p3bot_description)/urdf/base.xacro"/>
+  <xacro:include filename="$(find p3bot_description)/urdf/wheels.xacro"/>
+  <!--  ||||||||TODO||||||||   <xacro:include filename="$(find p3bot_description)/urdf/kinova_arm.xacro"/> -->
+  <xacro:include filename="$(find p3bot_description)/urdf/sensors.xacro"/>
+
+  <!-- ====== BASE ====== -->
+  <xacro:p3bot_base parent="base_link" use_meshes="$(arg use_meshes)"/>
+
+  <!-- ====== WHEELS ====== -->
+  <xacro:p3bot_wheels parent="base_link"/>
+
+  <!-- ====== ARMS ====== ||||||||TODO||||||||
+
+  <xacro:if value="$(arg left_arm)">
+    <xacro:kinova_arm prefix="left_" parent="base_link"
+      xyz="0.002 0.055 1.052"
+      rpy="-2.010005 0 0"/>
+  </xacro:if>
+
+  <xacro:if value="$(arg right_arm)">
+    <xacro:kinova_arm prefix="right_" parent="base_link"
+      xyz="0.01 -0.051761 1.04883"
+      rpy="2.01001 0 0"/>
+  </xacro:if>
+  
+  -->
+
+  <!-- ====== SENSORS ====== -->
+  <xacro:p3bot_sensors parent="base_link"/>
+
+</robot>

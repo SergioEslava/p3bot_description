@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <xacro:macro name="p3bot_sensors" params="parent">
+
+    <link name="zed_link"/>
+    <joint name="base_to_zed" type="fixed">
+      <parent link="${parent}"/>
+      <child link="zed_link"/>
+      <origin xyz="0.01 0 1.32" rpy="-1.570796 0 -1.570796"/>
+    </joint>
+
+    <link name="imu_link"/>
+    <joint name="base_to_imu" type="fixed">
+      <parent link="${parent}"/>
+      <child link="imu_link"/>
+      <origin xyz="0 0 0"/>
+    </joint>
+
+  </xacro:macro>
+
+</robot>
