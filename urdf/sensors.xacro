@@ -7,7 +7,7 @@
     <joint name="base_to_zed" type="fixed">
       <parent link="${parent}"/>
       <child link="zed_link"/>
-      <origin xyz="0.01 0 1.32" rpy="-1.570796 0 -1.570796"/>
+      <origin xyz="0.07 0 1.1"/>
     </joint>
 
     <link name="imu_link"/>
@@ -16,6 +16,21 @@
       <child link="imu_link"/>
       <origin xyz="0 0 0"/>
     </joint>
+
+    <link name="helios_link"/>
+    <joint name="base_to_helios" type="fixed">
+      <parent link="${parent}"/>
+      <child link="helios_link"/>
+      <origin xyz="-0.05 0 1.24"/>
+    </joint>
+
+    <link name="camera_360_link"/>
+    <joint name="base_to_camera_360" type="fixed">
+      <parent link="${parent}"/>
+      <child link="camera_360_link"/>
+      <origin xyz="-0.05 0 1.42"/>
+    </joint>
+
 
   </xacro:macro>
 

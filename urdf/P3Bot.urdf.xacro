@@ -13,7 +13,7 @@
   <!-- ====== INCLUDES ====== -->
   <xacro:include filename="$(find p3bot_description)/urdf/base.xacro"/>
   <xacro:include filename="$(find p3bot_description)/urdf/wheels.xacro"/>
-  <!--  ||||||||TODO||||||||   <xacro:include filename="$(find p3bot_description)/urdf/kinova_arm.xacro"/> -->
+  <xacro:include filename="$(find p3bot_description)/urdf/GEN3_URDF_V12.xacro"/>
   <xacro:include filename="$(find p3bot_description)/urdf/sensors.xacro"/>
 
   <!-- ====== BASE ====== -->
@@ -22,21 +22,36 @@
   <!-- ====== WHEELS ====== -->
   <xacro:p3bot_wheels parent="base_link"/>
 
-  <!-- ====== ARMS ====== ||||||||TODO||||||||
+  <!-- ====== ARMS ====== |-->
 
   <xacro:if value="$(arg left_arm)">
-    <xacro:kinova_arm prefix="left_" parent="base_link"
-      xyz="0.002 0.055 1.052"
-      rpy="-2.010005 0 0"/>
+
+    <link name="left_arm_mount"/>
+
+    <joint name="left_arm_mount_joint" type="fixed">
+      <parent link="base_link"/>
+      <child link="left_arm_mount"/>
+      <origin xyz="0.002 0.055 1.052"
+              rpy="1.13159 0 0"/>
+    </joint>
+
+    <xacro:GEN3_URDF_V12 prefix="left_" parent="left_arm_mount"/> 
   </xacro:if>
 
   <xacro:if value="$(arg right_arm)">
-    <xacro:kinova_arm prefix="right_" parent="base_link"
-      xyz="0.01 -0.051761 1.04883"
-      rpy="2.01001 0 0"/>
+
+    <link name="right_arm_mount"/>
+
+    <joint name="right_arm_mount_joint" type="fixed">
+      <parent link="base_link"/>
+      <child link="right_arm_mount"/>
+      <origin xyz="0.01 -0.051761 1.04883"
+              rpy="-1.13159 0 0"/>
+    </joint>
+
+    <xacro:GEN3_URDF_V12 prefix="right_" parent="right_arm_mount"/>
   </xacro:if>
-  
-  -->
+
 
   <!-- ====== SENSORS ====== -->
   <xacro:p3bot_sensors parent="base_link"/>
